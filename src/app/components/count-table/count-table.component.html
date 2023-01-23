@@ -1,0 +1,21 @@
+<div class="count-container">
+  <h2>Want to know how many pokemons are according to their initials?</h2>
+  <div class="count-table">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="letter">
+        <th mat-header-cell *matHeaderCellDef>Letter</th>
+        <td mat-cell *matCellDef="let tuple">
+          {{ tuple[0] | titlecase }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef>Count</th>
+        <td mat-cell *matCellDef="let tuple">
+          {{ tuple[1] }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="pokedex-main">
+  <mat-form-field appearance="fill" style=" margin-bottom: -1.25em">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      (keyup)="onSearchChanged($event)"
+      placeholder="Catch'em"
+      [(ngModel)]="search"
+      [formControl]="myControl"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let pokemon of filteredOptions | async"
+        [value]="pokemon.name"
+      >
+        {{ pokemon.name | titlecase }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="pokedex-table">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name" >
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let pokemon">
+          {{ pokemon.name | titlecase }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let pokemon">
+          <button mat-flat-button color="accent" (click)="onClickDetails(pokemon.name)">Details</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          No data matching the filter "{{ search }}"
+        </td>
+      </tr>
+    </table>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[50]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

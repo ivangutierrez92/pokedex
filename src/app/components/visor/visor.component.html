@@ -1,0 +1,30 @@
+<div
+  *ngIf="pokemonDetail; else noDetails"
+  class="pokedex-visor pokedex-sidebar"
+>
+  <img
+    class="pokemon-img"
+    [src]="pokemonDetail.sprites.front_default"
+    [alt]="pokemonDetail.name"
+    (error)="handleMissingImage($event)"
+  />
+  <h2>{{ pokemonDetail.name | titlecase | splitBy : "-" }}</h2>
+  <h3>Types:</h3>
+  <ul>
+    <li *ngFor="let type of pokemonDetail.types">
+      {{ type.type.name | titlecase }}
+    </li>
+  </ul>
+  <h3>Stats:</h3>
+  <ul>
+    <li *ngFor="let stat of pokemonDetail.stats">
+      {{ stat.stat.name | titlecase | splitBy : "-" }}: {{ stat.base_stat }}
+    </li>
+  </ul>
+</div>
+<ng-template #noDetails>
+  <div class="pokedex-visor no-details">
+    <h1>Welcome to the Pokedex</h1>
+    <img src="./assets/images/pokeball.png" alt="pokeball" />
+  </div>
+</ng-template>

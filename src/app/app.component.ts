@@ -1,30 +1,26 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Pokemon, PokemonDetail } from 'src/models/Pokemon.model';
+import { Component, OnInit } from '@angular/core';
+import { Pokemon, PokemonDetail } from 'src/app/models/Pokemon.model';
 import { PokemonsService } from './services/pokemons.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit{
   pokemons: Pokemon[] = [];
   pokemonDetail: PokemonDetail | undefined;
   myControl = new FormControl('');
-  search = '';
   filteredOptions: Observable<Pokemon[]>;
   dataSource = new MatTableDataSource<Pokemon>();
-  displayedColumns: string[] = ['name', 'details'];
-  nameCounter: Record<string, number>;
+  countDisplayedColumns: string[] = ['letter', 'count'];
+  nameCounter: [string, number][];
 
   constructor(private pokemonService: PokemonsService) {}
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -37,7 +33,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.dataSource.filterPredicate = (data: Pokemon, filter: string) => {
         return data.name.toLowerCase().includes(filter);
       };
-      this.nameCounter = this.pokemons.reduce<Record<string, number>>(
+      const nameCounterObject = this.pokemons.reduce<Record<string, number>>(
         (acc, curr) => {
           let firstLetter = curr.name.toLowerCase()[0];
           acc[firstLetter] ? (acc[firstLetter] += 1) : (acc[firstLetter] = 1);
@@ -45,11 +41,10 @@ export class AppComponent implements OnInit, AfterViewInit {
         },
         {}
       );
+      this.nameCounter = Object.entries(nameCounterObject).sort((a, b) =>
+        a[0].localeCompare(b[0])
+      );
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   openPokemonDetail(name: string) {

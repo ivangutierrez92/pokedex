@@ -1,88 +1,11 @@
 <div class="pokedex-container">
-  <div class="pokedex-main">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Search</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder="Catch'em"
-        [(ngModel)]="search"
-        [formControl]="myControl"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let pokemon of filteredOptions | async"
-          [value]="pokemon.name"
-        >
-          {{ pokemon.name | titlecase }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <div class="pokedex-table">
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let pokemon">
-            {{ pokemon.name | titlecase }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="details">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let pokemon">
-            <button (click)="openPokemonDetail(pokemon.name)">Details</button>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">
-            No data matching the filter "{{ search }}"
-          </td>
-        </tr>
-      </table>
-    </div>
-    <mat-paginator
-      [pageSizeOptions]="[50]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements"
-    >
-    </mat-paginator>
-  </div>
-  <div *ngIf="pokemonDetail; else noDetails" class="pokedex-sidebar">
-    <img
-      class="pokemon-img"
-      [src]="pokemonDetail.sprites.front_default"
-      [alt]="pokemonDetail.name"
-    />
-    <h2>{{ pokemonDetail.name | titlecase }}</h2>
-    <h3>Types:</h3>
-    <ul>
-      <li *ngFor="let type of pokemonDetail.types">
-        {{ type.type.name | titlecase }}
-      </li>
-    </ul>
-    <h3>Stats:</h3>
-    <ul>
-      <li *ngFor="let stat of pokemonDetail.stats">
-        {{ stat.stat.name | titlecase }}: {{ stat.base_stat }}
-      </li>
-    </ul>
-  </div>
-  <ng-template #noDetails>
-    <div class="no-details">
-      <h1>Welcome to the Pokedex</h1>
-      <img src="./assets/images/pokeball.png" alt="pokeball" />
-    </div>
-  </ng-template>
+  <app-pokedex
+    [dataSource]="dataSource"
+    [myControl]="myControl"
+    [filteredOptions]="filteredOptions"
+    (detailsClicked)="openPokemonDetail($event)"
+    (searchChanged)="applyFilter($event)"
+  ></app-pokedex>
+  <app-visor [pokemonDetail]="pokemonDetail"></app-visor>
 </div>
-<div class="count-container">
-  <h2>The number of Pokemons by their initials:</h2>
-  <div>
-    <p *ngFor="let item of nameCounter | keyvalue">
-      <span class="bold">{{ item.key | uppercase }}:</span
-      > {{ item.value }}
-    </p>
-  </div>
-</div>
+<app-count-table [dataSource]="nameCounter"></app-count-table>
