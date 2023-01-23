@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
         };
         const nameCounterObject = this.pokemons.reduce<Record<string, number>>(
           (acc, curr) => {
-            let firstLetter = curr.name.toLowerCase()[0];
+            const firstLetter = curr.name.toLowerCase()[0];
             acc[firstLetter] ? (acc[firstLetter] += 1) : (acc[firstLetter] = 1);
             return acc;
           },
