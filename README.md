@@ -1,27 +1,14 @@
 # Pokedex
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+## Sobre este proyecto:
+Esta página fue realizada con Angular 15,  y es una aplicación que recibe información a través de la API pública [PokeApi](https://pokeapi.co/).
+Varias de las funcionalidades se realizaron con la ayuda de Material Angular, además de los módulos de Formulario y HTTP.
 
-## Development server
+La aplicación contiene los siguientes elementos: 
+* Una tabla paginada con todos los pokemones, además de una función de filtro con autocompletado. Cada fila de la tabla tiene un botón para ver los detalles del pokemon.
+* Una sección en donde aparece la información de los pokemones cuando se clickea el botón de detalles.
+* Una tabla donde se cuentan cuántos pokemones comienzan con tal o tal letra.
+* Un Footer con información de contacto.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Por qué
+Este proyecto surge como una prueba técnica para la postulación de un trabajo, aunque ha sido un proyecto divertido de hacer, por lo que me gustaría seguir desarrollando algunas funcionalidades a futuro ❤️ 
