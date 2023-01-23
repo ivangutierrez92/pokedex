@@ -1,11 +1,23 @@
 <div class="pokedex-container">
+  <div *ngIf="status === 'loading'" class="loading">
+    <img src="./assets/images/pokeball-color.png" />
+  </div>
+  <div *ngIf="status === 'error'" class="error">
+    <img src="./assets/images/error.png" />
+    <h2>There was an error loading the pokemons, please try again later</h2>
+  </div>
   <app-pokedex
+    *ngIf="status === 'success'"
     [dataSource]="dataSource"
-    [myControl]="myControl"
+    [searchControl]="searchControl"
     [filteredOptions]="filteredOptions"
-    (detailsClicked)="openPokemonDetail($event)"
+    (detailsClicked)="openPokemonDetails($event)"
     (searchChanged)="applyFilter($event)"
   ></app-pokedex>
-  <app-visor [pokemonDetail]="pokemonDetail"></app-visor>
+  <app-visor [pokemonDetails]="pokemonDetails" [message]="detailsMessage"></app-visor>
 </div>
-<app-count-table [dataSource]="nameCounter"></app-count-table>
+<app-count-table
+  *ngIf="status === 'success'"
+  [dataSource]="nameCounter"
+></app-count-table>
+<app-footer></app-footer>

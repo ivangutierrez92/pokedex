@@ -14,9 +14,10 @@ import { PokedexComponent } from './components/pokedex/pokedex.component';
 import { VisorComponent } from './components/visor/visor.component';
 import { SplitByPipe } from './pipes/split-by.pipe';
 import { CountTableComponent } from './components/count-table/count-table.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, PokedexComponent, VisorComponent, SplitByPipe, CountTableComponent],
+  declarations: [AppComponent, PokedexComponent, VisorComponent, SplitByPipe, CountTableComponent, FooterComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  padding: 30px 50px;
+  justify-content: space-between;
+  background-color: rgb(255, 228, 228);
+  img {
+    width: 40px;
+  }
+}
+.contact,
+.social {
+  text-align: center;
+  margin: 0 auto auto auto;
+}
+.contact a {
+  color: #1E6BC2;
+  font-weight: 600;
+}
+.social-icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (max-width: 750px) {
+  .footer {
+    flex-direction: column;
+  }
+  .social {
+    margin-bottom: 30px;
+  }
+}

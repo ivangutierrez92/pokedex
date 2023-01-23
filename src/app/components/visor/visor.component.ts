@@ -7,7 +7,8 @@ import { PokemonDetail } from 'src/app/models/Pokemon.model';
   styleUrls: ['./visor.component.scss'],
 })
 export class VisorComponent {
-  @Input() pokemonDetail: PokemonDetail | undefined;
+  @Input() pokemonDetails: PokemonDetail | undefined;
+  @Input() message = 'Welcome to the Pokedex';
   notFoundImage = './assets/images/not-found.png';
 
   handleMissingImage(event: Event) {

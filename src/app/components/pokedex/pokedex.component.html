@@ -1,12 +1,12 @@
 <div class="pokedex-main">
-  <mat-form-field appearance="fill" style=" margin-bottom: -1.25em">
+  <mat-form-field appearance="fill" style="margin-bottom: -1.25em">
     <mat-label>Search</mat-label>
     <input
       matInput
       (keyup)="onSearchChanged($event)"
       placeholder="Catch'em"
       [(ngModel)]="search"
-      [formControl]="myControl"
+      [formControl]="searchControl"
       [matAutocomplete]="auto"
     />
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -20,7 +20,7 @@
   </mat-form-field>
   <div class="pokedex-table">
     <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="name" >
+      <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let pokemon">
           {{ pokemon.name | titlecase }}
@@ -29,15 +29,21 @@
       <ng-container matColumnDef="details">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let pokemon">
-          <button mat-flat-button color="accent" (click)="onClickDetails(pokemon.name)">Details</button>
+          <button
+            mat-flat-button
+            color="accent"
+            (click)="onClickDetails(pokemon.name)"
+          >
+            Details
+          </button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">
-          No data matching the filter "{{ search }}"
+        <td class="mat-cell" colspan="4" class="not-found">
+          <h2>No pokemon found with the filter "{{ search }}"</h2>
         </td>
       </tr>
     </table>

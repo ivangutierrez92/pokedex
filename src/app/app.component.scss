@@ -5,10 +5,42 @@
   border-bottom: 1px solid black;
   box-sizing: content-box;
 }
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 250px;
+    animation: rotation 2s infinite linear;
+  }
+}
+.error {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  img {
+    width: 250px;
+  }h2 {
+    text-align: center;
+  }
+}
 @media (max-width: 768px) {
   .pokedex-container {
     display: flex;
     flex-direction: column;
     height: auto;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }

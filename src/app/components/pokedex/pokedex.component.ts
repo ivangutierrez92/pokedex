@@ -21,7 +21,7 @@ export class PokedexComponent implements AfterViewInit {
   search = '';
   displayedColumns: string[] = ['name', 'details'];
   @Input() dataSource: MatTableDataSource<Pokemon>;
-  @Input() myControl = new FormControl('');
+  @Input() searchControl = new FormControl('');
   @Input() filteredOptions: Observable<Pokemon[]>;
   @Output() detailsClicked = new EventEmitter<string>();
   @Output() searchChanged = new EventEmitter<Event>();
