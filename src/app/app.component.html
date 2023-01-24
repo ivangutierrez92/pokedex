@@ -1,6 +1,6 @@
 <div class="pokedex-container">
   <div *ngIf="status === 'loading'" class="loading">
-    <img src="./assets/images/pokeball-color.png" />
+    <img src="./assets/images/pokeball-color.jpg" />
   </div>
   <div *ngIf="status === 'error'" class="error">
     <img src="./assets/images/error.png" />
@@ -8,16 +8,16 @@
   </div>
   <app-pokedex
     *ngIf="status === 'success'"
-    [dataSource]="dataSource"
-    [searchControl]="searchControl"
-    [filteredOptions]="filteredOptions"
+    [pokemons]="pokemons"
     (detailsClicked)="openPokemonDetails($event)"
-    (searchChanged)="applyFilter($event)"
   ></app-pokedex>
-  <app-visor [pokemonDetails]="pokemonDetails" [message]="detailsMessage"></app-visor>
+  <app-visor
+    [pokemonDetails]="pokemonDetails"
+    [message]="detailsMessage"
+  ></app-visor>
 </div>
 <app-count-table
   *ngIf="status === 'success'"
-  [dataSource]="nameCounter"
+  [pokemons]="pokemons"
 ></app-count-table>
 <app-footer></app-footer>

@@ -3,7 +3,7 @@
     <mat-label>Search</mat-label>
     <input
       matInput
-      (keyup)="onSearchChanged($event)"
+      (keyup)="applyFilter($event)"
       placeholder="Catch'em"
       [(ngModel)]="search"
       [formControl]="searchControl"
